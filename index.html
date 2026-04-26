@@ -4,1260 +4,651 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Companion Toys — 遇见你的温暖伙伴</title>
+  <meta name="description" content="探索最受欢迎的互动陪伴玩偶：Fuzozo 芙崽、BubblePal、京东京造 8 Friends、Sweekar、bibo、Joobie 小鹰啾。每一只都有属于自己的性格和温度。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
   <style>
-    /* ===== Reset & Base ===== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --peach:       #FDE8D4;
-      --cream:       #FFF8F0;
-      --lavender:    #E8DFF5;
-      --sage:        #D4E8D8;
-      --coral:       #FF8A7A;
-      --coral-dark:  #E87565;
-      --brown:       #5D4037;
-      --brown-light: #8D6E63;
-      --brown-pale:  #A1887F;
-      --white:       #FFFFFF;
-      --shadow-soft: 0 8px 32px rgba(93, 64, 55, 0.08);
-      --shadow-hover: 0 20px 60px rgba(93, 64, 55, 0.14);
-      --radius-sm:   16px;
-      --radius-md:   24px;
-      --radius-lg:   32px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body {
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--cream);
-      color: var(--brown);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ===== Utility ===== */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    @media (min-width: 768px) {
-      .container { padding: 0 40px; }
-    }
-
-    @media (min-width: 1024px) {
-      .container { padding: 0 64px; }
-    }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--coral);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 800;
-      line-height: 1.2;
-      color: var(--brown);
-    }
-
-    @media (min-width: 768px) {
-      .section-title { font-size: 2.8rem; }
-    }
-
-    /* ===== Animations ===== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-12px); }
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 138, 122, 0.4); }
-      50%      { box-shadow: 0 0 0 20px rgba(255, 138, 122, 0); }
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-delay-1  { transition-delay: 0.1s; }
-    .reveal-delay-2  { transition-delay: 0.2s; }
-    .reveal-delay-3  { transition-delay: 0.3s; }
-    .reveal-delay-4  { transition-delay: 0.4s; }
-    .reveal-delay-5  { transition-delay: 0.5s; }
-    .reveal-delay-6  { transition-delay: 0.6s; }
-
-    /* ===== Navigation ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 16px 0;
-      transition: background 0.4s ease, padding 0.4s ease;
-    }
-
-    nav.scrolled {
-      background: rgba(255, 248, 240, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 10px 0;
-      box-shadow: 0 1px 0 rgba(93, 64, 55, 0.06);
-    }
-
-    nav .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--brown);
-      font-weight: 800;
-      font-size: 1.15rem;
-    }
-
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: linear-gradient(135deg, var(--coral), #FFB088);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    .nav-links {
-      display: none;
-      list-style: none;
-      gap: 32px;
-    }
-
-    @media (min-width: 768px) {
-      .nav-links { display: flex; }
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--brown-light);
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--coral);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-      border-radius: 2px;
-    }
-
-    .nav-links a:hover { color: var(--brown); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    .mobile-menu-btn {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    @media (min-width: 768px) {
-      .mobile-menu-btn { display: none; }
-    }
-
-    .mobile-menu-btn span {
-      display: block;
-      width: 24px;
-      height: 2.5px;
-      background: var(--brown);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    /* ===== Hero ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(165deg, var(--peach) 0%, var(--cream) 40%, var(--lavender) 100%);
-      position: relative;
-      overflow: hidden;
-      padding: 120px 0 80px;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -30%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 138, 122, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -20%;
-      left: -15%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(232, 223, 245, 0.25) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 48px;
-      position: relative;
-      z-index: 1;
-    }
-
-    @media (min-width: 1024px) {
-      .hero .container {
-        flex-direction: row;
-        text-align: left;
-        gap: 80px;
-      }
-    }
-
-    .hero-content {
-      flex: 1;
-      max-width: 560px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      background: rgba(255, 138, 122, 0.12);
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--coral);
-      margin-bottom: 24px;
-      animation: fadeUp 0.8s ease 0.2s both;
-    }
-
-    .hero h1 {
-      font-size: 2.4rem;
-      font-weight: 900;
-      line-height: 1.15;
-      color: var(--brown);
-      margin-bottom: 20px;
-      animation: fadeUp 0.8s ease 0.3s both;
-    }
-
-    .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--coral), #FFB088);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    @media (min-width: 768px) {
-      .hero h1 { font-size: 3.6rem; }
-    }
-
-    @media (min-width: 1024px) {
-      .hero h1 { font-size: 4.2rem; }
-    }
-
-    .hero-sub {
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--brown-light);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 480px;
-    }
-
-    @media (min-width: 768px) {
-      .hero-sub { font-size: 1.25rem; }
-    }
-
-    .hero .hero-sub {
-      animation: fadeUp 0.8s ease 0.4s both;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 18px 40px;
-      background: linear-gradient(135deg, var(--coral), #FFB088);
-      color: var(--white);
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 60px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 20px rgba(255, 138, 122, 0.35);
-      animation: fadeUp 0.8s ease 0.5s both;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 8px 30px rgba(255, 138, 122, 0.45);
-    }
-
-    .hero-cta:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    .hero-visual {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: fadeUp 0.8s ease 0.6s both;
-    }
-
-    .hero-toy-frame {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--lavender), var(--peach));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      box-shadow: 0 20px 80px rgba(93, 64, 55, 0.1);
-      animation: float 4s ease-in-out infinite;
-    }
-
-    @media (min-width: 768px) {
-      .hero-toy-frame { width: 400px; height: 400px; }
-    }
-
-    .hero-toy-frame img {
-      width: 85%;
-      height: 85%;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    .hero-floating-tag {
-      position: absolute;
-      bottom: 20px;
-      right: 10px;
-      background: var(--white);
-      padding: 10px 18px;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--coral);
-      box-shadow: 0 4px 16px rgba(93, 64, 55, 0.1);
-      animation: float 3s ease-in-out infinite;
-      animation-delay: -1s;
-    }
-
-    @media (min-width: 768px) {
-      .hero-floating-tag {
-        bottom: 30px;
-        right: 20px;
-        padding: 12px 24px;
-        font-size: 0.9rem;
-      }
-    }
-
-    /* Floating orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      opacity: 0.5;
-    }
-
-    .orb-1 {
-      width: 80px; height: 80px;
-      background: var(--sage);
-      top: 15%; left: 8%;
-      animation: float 5s ease-in-out infinite;
-    }
-
-    .orb-2 {
-      width: 50px; height: 50px;
-      background: var(--lavender);
-      bottom: 25%; right: 10%;
-      animation: float 4s ease-in-out infinite;
-      animation-delay: -2s;
-    }
-
-    .orb-3 {
-      width: 120px; height: 120px;
-      background: rgba(255, 138, 122, 0.08);
-      bottom: 10%; right: 35%;
-      animation: float 6s ease-in-out infinite;
-      animation-delay: -1s;
-    }
-
-    /* ===== Scroll indicator ===== */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--brown-pale);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      animation: fadeIn 1s ease 1.5s both;
-    }
-
-    .scroll-line {
-      width: 1.5px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--brown-pale), transparent);
-      animation: fadeIn 1.5s ease infinite;
-    }
-
-    /* ===== Featured Companions ===== */
-    .companions {
-      padding: 100px 0;
-      background: var(--cream);
-    }
-
-    .companions-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .companions-header p {
-      font-size: 1.05rem;
-      color: var(--brown-light);
-      max-width: 520px;
-      margin: 16px auto 0;
-      font-weight: 400;
-    }
-
-    .companions-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    @media (min-width: 540px) {
-      .companions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .companions-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .toy-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-soft);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .toy-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .toy-card-image {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--peach);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .toy-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .toy-card:hover .toy-card-image img {
-      transform: scale(1.05);
-    }
-
-    .toy-card-tag {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      padding: 6px 14px;
-      border-radius: 40px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      background: var(--white);
-      color: var(--coral);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-
-    .toy-card-body {
-      padding: 24px 20px 26px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .toy-card-name {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--brown);
-      margin-bottom: 4px;
-    }
-
-    .toy-card-name-cn {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--brown-pale);
-      margin-bottom: 10px;
-    }
-
-    .toy-card-desc {
-      font-size: 0.92rem;
-      color: var(--brown-light);
-      line-height: 1.6;
-      font-weight: 400;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    .toy-card-personality {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--cream);
-      border-radius: 40px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--brown-light);
-      align-self: flex-start;
-    }
-
-    /* Alternate card background colors */
-    .toy-card:nth-child(1) .toy-card-image { background: linear-gradient(135deg, #FDE8D4, #FCE4D6); }
-    .toy-card:nth-child(2) .toy-card-image { background: linear-gradient(135deg, #E8DFF5, #F3E8FF); }
-    .toy-card:nth-child(3) .toy-card-image { background: linear-gradient(135deg, #D4E8D8, #E8F5E9); }
-    .toy-card:nth-child(4) .toy-card-image { background: linear-gradient(135deg, #FFF3E0, #FDE8D4); }
-    .toy-card:nth-child(5) .toy-card-image { background: linear-gradient(135deg, #FCE4EC, #FDE8D4); }
-    .toy-card:nth-child(6) .toy-card-image { background: linear-gradient(135deg, #E8DFF5, #F5F0FF); }
-
-    /* ===== Why Choose ===== */
-    .why-choose {
-      padding: 100px 0;
-      background: linear-gradient(180deg, var(--cream) 0%, var(--peach) 100%);
-    }
-
-    .why-choose-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    @media (min-width: 640px) {
-      .benefits-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .benefit-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 40px 32px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .benefit-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .benefit-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .benefit-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--brown);
-      margin-bottom: 12px;
-    }
-
-    .benefit-desc {
-      font-size: 0.95rem;
-      color: var(--brown-light);
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    /* ===== Testimonials ===== */
-    .testimonials {
-      padding: 100px 0;
-      background: var(--cream);
-    }
-
-    .testimonials-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-
-    @media (min-width: 640px) {
-      .testimonial-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      border-radius: var(--radius-md);
-      padding: 36px 32px;
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .testimonial-quote {
-      font-size: 2.4rem;
-      line-height: 1;
-      color: var(--coral);
-      opacity: 0.4;
-      margin-bottom: 12px;
-      font-family: Georgia, serif;
-    }
-
-    .testimonial-text {
-      font-size: 0.95rem;
-      color: var(--brown-light);
-      line-height: 1.7;
-      font-weight: 400;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .testimonial-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--peach), var(--lavender));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--brown);
-      flex-shrink: 0;
-    }
-
-    .testimonial-name {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--brown);
-    }
-
-    .testimonial-role {
-      font-size: 0.8rem;
-      color: var(--brown-pale);
-      font-weight: 400;
-    }
-
-    /* ===== Footer ===== */
-    footer {
-      padding: 48px 0;
-      background: var(--brown);
-      color: rgba(255, 255, 255, 0.7);
-      text-align: center;
-    }
-
-    footer .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .footer-logo {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--white);
-    }
-
-    .footer-copy {
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.4);
-      font-weight: 400;
-      margin-top: 8px;
-    }
-
-    .footer-divider {
-      width: 40px;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 2px;
-    }
-
-    /* ===== Responsive fine-tune ===== */
-    @media (max-width: 539px) {
-      .section-title { font-size: 1.7rem; }
-      .hero h1 { font-size: 2rem; }
-      .hero-toy-frame { width: 240px; height: 240px; }
-      .benefit-card { padding: 32px 24px; }
-      .toy-card-body { padding: 20px 16px 22px; }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --peach:#FDE8D4;--cream:#FFF8F0;--lavender:#E8DFF5;--sage:#D4E8D8;
+      --coral:#FF8A7A;--coral-dark:#E87565;--brown:#5D4037;--brown-light:#8D6E63;
+      --brown-pale:#A1887F;--white:#FFFFFF;--gold:#F2C94C;
+      --shadow-sm:0 2px 12px rgba(93,64,55,0.06);
+      --shadow-md:0 8px 32px rgba(93,64,55,0.08);
+      --shadow-lg:0 20px 60px rgba(93,64,55,0.14);
+      --radius-sm:12px;--radius-md:20px;--radius-lg:28px;--radius-xl:36px
+    }
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{
+      font-family:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      background:var(--cream);color:var(--brown);line-height:1.65;overflow-x:hidden
+    }
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+    @media(min-width:768px){.container{padding:0 40px}}
+    @media(min-width:1024px){.container{padding:0 56px}}
+
+    .section-label{
+      display:inline-block;font-size:0.8rem;font-weight:700;letter-spacing:0.12em;
+      text-transform:uppercase;color:var(--coral);margin-bottom:10px
+    }
+    .section-title{
+      font-size:1.8rem;font-weight:900;line-height:1.2;color:var(--brown);margin-bottom:12px
+    }
+    @media(min-width:768px){.section-title{font-size:2.4rem}}
+    .section-sub{
+      font-size:1.05rem;color:var(--brown-light);max-width:560px;font-weight:400
+    }
+
+    /* Animations */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
+
+    /* Nav */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 0;
+      transition:background 0.35s ease,padding 0.35s ease,box-shadow 0.35s ease
+    }
+    nav.scrolled{background:rgba(255,248,240,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:8px 0;box-shadow:0 1px 0 rgba(93,64,55,0.06)}
+    nav .container{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--brown);font-weight:800;font-size:1.1rem}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--coral),#FFB088);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+    .nav-links{display:none;list-style:none;gap:28px}
+    @media(min-width:768px){.nav-links{display:flex}}
+    .nav-links a{text-decoration:none;color:var(--brown-light);font-weight:600;font-size:0.9rem;transition:color 0.25s;position:relative}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:2px;background:var(--coral);transform:scaleX(0);transition:transform 0.25s;border-radius:2px}
+    .nav-links a:hover{color:var(--brown)}.nav-links a:hover::after{transform:scaleX(1)}
+    .menu-btn{display:flex;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    @media(min-width:768px){.menu-btn{display:none}}
+    .menu-btn span{display:block;width:22px;height:2.5px;background:var(--brown);border-radius:2px;transition:all 0.3s}
+
+    /* Hero */
+    .hero{
+      min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+      background:linear-gradient(165deg,var(--peach) 0%,var(--cream) 40%,var(--lavender) 90%);
+      padding:100px 0 80px
+    }
+    .hero::before{
+      content:'';position:absolute;top:-25%;right:-15%;width:500px;height:500px;
+      background:radial-gradient(circle,rgba(255,138,122,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none
+    }
+    .hero::after{
+      content:'';position:absolute;bottom:-15%;left:-10%;width:400px;height:400px;
+      background:radial-gradient(circle,rgba(232,223,245,0.2) 0%,transparent 70%);border-radius:50%;pointer-events:none
+    }
+    .hero .container{
+      position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
+      text-align:center;gap:40px
+    }
+    @media(min-width:1024px){.hero .container{flex-direction:row;text-align:left;gap:80px}}
+    .hero-content{flex:1;max-width:540px}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:6px;padding:8px 18px;
+      background:rgba(255,138,122,0.12);border-radius:100px;font-size:0.82rem;
+      font-weight:700;color:var(--coral);margin-bottom:20px;animation:fadeUp 0.7s ease 0.2s both
+    }
+    .hero h1{font-size:2.2rem;font-weight:900;line-height:1.15;color:var(--brown);margin-bottom:16px;animation:fadeUp 0.7s ease 0.3s both}
+    .hero h1 .hl{background:linear-gradient(135deg,var(--coral),#FFB088);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    @media(min-width:768px){.hero h1{font-size:3rem}}
+    @media(min-width:1024px){.hero h1{font-size:3.8rem}}
+    .hero p{
+      font-size:1.05rem;color:var(--brown-light);line-height:1.7;margin-bottom:32px;
+      max-width:460px;animation:fadeUp 0.7s ease 0.4s both
+    }
+    @media(min-width:768px){.hero p{font-size:1.15rem}}
+    .hero a.cta{
+      display:inline-flex;align-items:center;gap:8px;padding:16px 36px;
+      background:linear-gradient(135deg,var(--coral),#FFB088);color:var(--white);
+      font-weight:700;font-size:1rem;border-radius:60px;text-decoration:none;
+      box-shadow:0 4px 18px rgba(255,138,122,0.3);transition:transform 0.3s,box-shadow 0.3s;
+      animation:fadeUp 0.7s ease 0.5s both
+    }
+    .hero a.cta:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,138,122,0.4)}
+    .hero-visual{flex:1;display:flex;align-items:center;justify-content:center;animation:fadeUp 0.7s ease 0.6s both}
+    .hero-img-box{width:280px;height:280px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,var(--lavender),var(--peach));box-shadow:0 16px 64px rgba(93,64,55,0.1);animation:float 4s ease-in-out infinite;display:flex;align-items:center;justify-content:center}
+    .hero-img-box img{width:90%;height:90%;object-fit:contain;border-radius:50%}
+    @media(min-width:768px){.hero-img-box{width:360px;height:360px}}
+
+    /* ===== Product Section ===== */
+    .product-section{padding:90px 0}
+    .product-section.alt{background:linear-gradient(180deg,var(--cream) 0%,var(--peach) 100%)}
+    .product-row{display:flex;flex-direction:column;align-items:center;gap:36px}
+    @media(min-width:768px){.product-row{flex-direction:row;gap:56px}}
+    .product-row.reverse{flex-direction:column}@media(min-width:768px){.product-row.reverse{flex-direction:row-reverse}}
+    .product-image{flex:1;min-width:0;display:flex;justify-content:center}
+    .product-image .img-frame{
+      width:100%;max-width:400px;aspect-ratio:1;border-radius:var(--radius-lg);overflow:hidden;
+      box-shadow:var(--shadow-md);position:relative;display:flex;align-items:center;justify-content:center
+    }
+    .product-image .img-frame img{width:100%;height:100%;object-fit:cover}
+    .product-image .price-tag{
+      position:absolute;bottom:14px;right:14px;background:var(--white);padding:8px 16px;
+      border-radius:40px;font-weight:800;font-size:0.85rem;color:var(--coral);box-shadow:var(--shadow-sm)
+    }
+    .product-info{flex:1;min-width:0}
+    .product-info .pill{
+      display:inline-block;padding:5px 14px;border-radius:40px;font-size:0.75rem;
+      font-weight:700;letter-spacing:0.04em;margin-bottom:12px
+    }
+    .product-info h3{font-size:1.6rem;font-weight:900;color:var(--brown);margin-bottom:4px}
+    .product-info .brand{font-size:0.88rem;color:var(--brown-pale);font-weight:600;margin-bottom:12px}
+    .product-info .desc{font-size:0.98rem;color:var(--brown-light);line-height:1.7;margin-bottom:20px}
+    .features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+    .features li{display:flex;align-items:flex-start;gap:10px;font-size:0.9rem;color:var(--brown-light);line-height:1.5}
+    .features li .ficon{flex-shrink:0;width:20px;text-align:center;font-size:1rem}
+    .buy-links{display:flex;flex-wrap:wrap;gap:10px}
+    .buy-links a{
+      display:inline-flex;align-items:center;gap:6px;padding:10px 20px;
+      border:1.5px solid var(--brown-pale);border-radius:40px;text-decoration:none;
+      font-size:0.85rem;font-weight:700;color:var(--brown);transition:all 0.25s
+    }
+    .buy-links a:hover{background:var(--brown);color:var(--white);border-color:var(--brown)}
+    @media(min-width:768px){.product-info h3{font-size:2rem}}
+
+    /* ===== Product card colors ===== */
+    .pill-fuzozo{background:#FDE8D4;color:#C25A3C}
+    .pill-bubblepal{background:#E8DFF5;color:#7B5EA7}
+    .pill-jdfriends{background:#D4E8D8;color:#3D6B4F}
+    .pill-sweekar{background:#FFF3E0;color:#BF6A02}
+    .pill-bibo{background:#FCE4EC;color:#C0506E}
+    .pill-joobie{background:#E8EAF6;color:#4A5598}
+
+    /* Comparison Table */
+    .compare-section{padding:90px 0;background:var(--cream)}
+    .compare-header{text-align:center;margin-bottom:48px}
+    .compare-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius-md);box-shadow:var(--shadow-md);background:var(--white)}
+    .compare-table{width:100%;border-collapse:collapse;min-width:600px;font-size:0.88rem}
+    .compare-table thead th{
+      background:var(--brown);color:var(--white);padding:14px 16px;text-align:left;
+      font-weight:700;font-size:0.82rem;white-space:nowrap
+    }
+    .compare-table thead th:first-child{border-radius:var(--radius-md) 0 0 0}
+    .compare-table thead th:last-child{border-radius:0 var(--radius-md) 0 0}
+    .compare-table td{padding:13px 16px;border-bottom:1px solid rgba(93,64,55,0.06);color:var(--brown-light);white-space:nowrap}
+    .compare-table td:first-child{font-weight:700;color:var(--brown)}
+    .compare-table tbody tr:last-child td:first-child{border-radius:0 0 0 var(--radius-md)}
+    .compare-table tbody tr:last-child td:last-child{border-radius:0 0 var(--radius-md) 0}
+    .compare-table tbody tr:hover{background:var(--cream)}
+    .tag-available{display:inline-block;padding:3px 10px;background:#D4E8D8;color:#3D6B4F;border-radius:40px;font-size:0.75rem;font-weight:700}
+    .tag-upcoming{display:inline-block;padding:3px 10px;background:#FFF3E0;color:#BF6A02;border-radius:40px;font-size:0.75rem;font-weight:700}
+    .tag-soldout{display:inline-block;padding:3px 10px;background:#FCE4EC;color:#C0506E;border-radius:40px;font-size:0.75rem;font-weight:700}
+
+    /* Guide */
+    .guide-section{padding:90px 0;background:linear-gradient(180deg,var(--peach) 0%,var(--cream) 100%)}
+    .guide-header{text-align:center;margin-bottom:48px}
+    .guide-grid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:640px){.guide-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
+    .guide-card{
+      background:var(--white);border-radius:var(--radius-md);padding:28px 24px;
+      box-shadow:var(--shadow-sm);border-top:4px solid var(--coral);
+      transition:transform 0.35s,box-shadow 0.35s
+    }
+    .guide-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+    .guide-card h4{font-size:1.05rem;font-weight:800;color:var(--brown);margin-bottom:6px}
+    .guide-card .who{font-size:0.78rem;font-weight:700;color:var(--coral);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px}
+    .guide-card p{font-size:0.9rem;color:var(--brown-light);line-height:1.6}
+
+    /* FAQ */
+    .faq-section{padding:90px 0;background:var(--cream)}
+    .faq-header{text-align:center;margin-bottom:48px}
+    .faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+    .faq-item{background:var(--white);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)}
+    .faq-q{
+      width:100%;text-align:left;padding:18px 24px;background:none;border:none;
+      font-family:'Nunito',sans-serif;font-size:0.95rem;font-weight:700;color:var(--brown);
+      cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px
+    }
+    .faq-q .arrow{transition:transform 0.3s;font-size:0.7rem;color:var(--brown-pale)}
+    .faq-item.open .faq-q .arrow{transform:rotate(180deg)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease}
+    .faq-item.open .faq-a{max-height:300px}
+    .faq-a p{padding:0 24px 20px;font-size:0.9rem;color:var(--brown-light);line-height:1.65}
+
+    /* Footer */
+    footer{padding:48px 0;background:var(--brown);color:rgba(255,255,255,0.7);text-align:center}
+    footer .container{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .footer-logo{font-size:1.05rem;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;list-style:none}
+    .footer-links a{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.85rem;font-weight:600;transition:color 0.25s}
+    .footer-links a:hover{color:var(--white)}
+    .footer-copy{font-size:0.8rem;color:rgba(255,255,255,0.35);font-weight:400;margin-top:4px}
+    .footer-div{width:36px;height:2px;background:rgba(255,255,255,0.12);border-radius:2px}
+
+    @media(max-width:539px){
+      .section-title{font-size:1.5rem}
+      .hero h1{font-size:1.8rem}
+      .product-image .img-frame{max-width:300px}
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== Navigation ===== -->
-  <nav id="navbar">
+<!-- ===== Nav ===== -->
+<nav id="nav">
+  <div class="container">
+    <a href="#" class="logo"><span class="logo-icon">&#x1F9F8;</span> Companion Toys</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#compare">Compare</a></li>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">&#x2728; Handcrafted with warmth</div>
+      <h1>遇见你的<br/><span class="hl">温暖伙伴</span></h1>
+      <p>Some companions are born to be held. Not gadgets, not tools — just warm, gentle friends who listen, grow with you, and make every day a little softer.</p>
+      <a href="#collection" class="cta">Meet the friends &#x2192;</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-box"><img src="images/fuzozo_01.jpg" alt="Fuzozo warm companion toy" loading="eager" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Collection ===== -->
+<section id="collection">
+
+  <!-- ---- Fuzozo ---- -->
+  <div class="product-section">
     <div class="container">
-      <a href="#" class="logo">
-        <span class="logo-icon">&#x1F9F8;</span>
-        Companion Toys
-      </a>
-      <ul class="nav-links">
-        <li><a href="#companions">Collection</a></li>
-        <li><a href="#why-choose">Why Choose</a></li>
-        <li><a href="#testimonials">Stories</a></li>
-      </ul>
-      <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="product-row reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#FDE8D4,#FCE4D6)">
+            <img src="images/fuzozo_01.jpg" alt="Fuzozo 芙崽 - the fluffy listener" loading="lazy" />
+            <span class="price-tag">&#165;399</span>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="pill pill-fuzozo">&#x2B50; Bestseller</span>
+          <h3>Fuzozo &#x8287;&#x5D3D;</h3>
+          <div class="brand">by Robopoet / &#x73DE;&#x535A;&#x667A;&#x80FD;</div>
+          <p class="desc">
+            The fluffy one who always listens. Fuzozo is a palm-sized companion with a personality that grows alongside you — shaped by every cuddle, every whisper, every moment you spend together.
+          </p>
+          <ul class="features">
+            <li><span class="ficon">&#x1F49C;</span> Learns your habits and preferences over time, writes a shared diary of your days</li>
+            <li><span class="ficon">&#x1F3AD;</span> Five base personalities (Metal, Wood, Water, Fire, Earth) — each coat color holds a different soul</li>
+            <li><span class="ficon">&#x1F91A;</span> Touch-sensitive: pat its head, shake it, or let two Fuzozos "high-five" to become friends</li>
+            <li><span class="ficon">&#x1F4F1;</span> Companion app shows your Fuzozo's evolving MBTI personality over time</li>
+            <li><span class="ficon">&#x1F50B;</span> ~48-hour battery on normal use; USB-C charging</li>
+          </ul>
+          <div class="buy-links">
+            <a href="https://search.jd.com/Search?keyword=Fuzozo芙崽" target="_blank" rel="noopener">&#x1F6CD; JD.com</a>
+            <a href="https://www.tmall.com" target="_blank" rel="noopener">&#x1F6CD; Tmall</a>
+            <a href="https://www.vmall.com" target="_blank" rel="noopener">&#x1F6CD; Huawei Mall (&#x8058;&#x61A8;&#x7248;)</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero" id="hero">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
+  <!-- ---- BubblePal ---- -->
+  <div class="product-section alt">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <span>&#x2728;</span>
-          Handcrafted with warmth
+      <div class="product-row reverse reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#E8DFF5,#F3E8FF)">
+            <img src="images/bubblepal_01.png" alt="BubblePal - story weaver charm" loading="lazy" />
+            <span class="price-tag">&#165;399-599</span>
+          </div>
         </div>
-        <h1>
-          遇见你的<br />
-          <span class="highlight">温暖伙伴</span>
-        </h1>
-        <p class="hero-sub">
-          Some companions are born to be held.<br />
-          Meet your new friend, always ready for a hug.
-        </p>
-        <a href="#companions" class="hero-cta">
-          Explore the collection
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14"/>
-            <path d="m12 5 7 7-7 7"/>
-          </svg>
-        </a>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-toy-frame">
-          <img
-            src="https://placehold.co/400x400/FDE8D4/5D4037?text=%E8%8A%99%E5%B4%BD+Fuzozo&font=Nunito"
-            alt="A warm, fluffy companion toy"
-            loading="eager"
-          />
-          <div class="hero-floating-tag">
-            &#x1F49D; New friend
+        <div class="product-info">
+          <span class="pill pill-bubblepal">&#x1F4D6; Storyteller</span>
+          <h3>BubblePal</h3>
+          <div class="brand">by Haivivi / &#x8DC3;&#x7136;&#x521B;&#x65B0;</div>
+          <p class="desc">
+            Give any stuffed friend a voice. BubblePal is a small, clip-on companion charm that turns any plush toy into a talking friend who weaves stories, sings lullabies, and never runs out of things to share.
+          </p>
+          <ul class="features">
+            <li><span class="ficon">&#x1F4CE;</span> Clip onto any plush toy — your old teddy bear gets a whole new life</li>
+            <li><span class="ficon">&#x1F4DA;</span> Story library with co-creation mode: you and your plush build stories together</li>
+            <li><span class="ficon">&#x1F310;</span> Bilingual support and 30+ character voices to switch between</li>
+            <li><span class="ficon">&#x1F6B8;</span> Food-grade silicone, safe for little hands</li>
+            <li><span class="ficon">&#x1F4CA;</span> Parent app with emotional weather charts and growth reports</li>
+          </ul>
+          <div class="buy-links">
+            <a href="https://search.jd.com/Search?keyword=BubblePal" target="_blank" rel="noopener">&#x1F6CD; JD.com</a>
+            <a href="https://www.taobao.com" target="_blank" rel="noopener">&#x1F6CD; Taobao</a>
+            <a href="https://www.amazon.com/stores/Haivivi" target="_blank" rel="noopener">&#x1F6CD; Amazon</a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="scroll-indicator">
-      <span>Discover</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- ===== Featured Companions ===== -->
-  <section class="companions" id="companions">
+  <!-- ---- JD 8 Friends ---- -->
+  <div class="product-section">
     <div class="container">
-      <div class="companions-header reveal">
-        <span class="section-label">&#x1F3F7; The Collection</span>
-        <h2 class="section-title">Featured Companions</h2>
-        <p>Each friend has a heart of their own. Find the one that calls to you.</p>
-      </div>
-
-      <div class="companions-grid">
-
-        <!-- Card 1: Fuzozo -->
-        <div class="toy-card reveal reveal-delay-1">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/FDE8D4/5D4037?text=%E8%8A%99%E5%B4%BD+%C2%B7+Fuzozo&font=Nunito"
-              alt="Fuzozo fluffy companion toy"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x2B50; Bestseller</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">Fuzozo</div>
-            <div class="toy-card-name-cn">&#x8287;&#x5D3D; Fuzozo</div>
-            <p class="toy-card-desc">
-              The fluffy one who always listens. With a gentle squeeze, Fuzozo responds with a warm hug and a soft whisper.
-            </p>
-            <span class="toy-card-personality">&#x1F9F8; Gentle listener</span>
+      <div class="product-row reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#D4E8D8,#E8F5E9)">
+            <img src="images/jd_plush_01.png" alt="JD 8 Friends plush collection" loading="lazy" />
+            <span class="price-tag">&#165;89-249</span>
           </div>
         </div>
-
-        <!-- Card 2: BubblePal -->
-        <div class="toy-card reveal reveal-delay-2">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/E8DFF5/5D4037?text=BubblePal&font=Nunito"
-              alt="BubblePal companion toy"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x1F308; Storyteller</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">BubblePal</div>
-            <div class="toy-card-name-cn">BubblePal</div>
-            <p class="toy-card-desc">
-              Brings any toy to life with stories and songs. Clip BubblePal onto your favourite stuffed friend and watch the magic unfold.
-            </p>
-            <span class="toy-card-personality">&#x1F4D6; Story weaver</span>
+        <div class="product-info">
+          <span class="pill pill-jdfriends">&#x1F465; Collection</span>
+          <h3>8 Friends</h3>
+          <div class="brand">by &#x4EAC;&#x4E1C;&#x4EAC;&#x9020; JoyInside</div>
+          <p class="desc">
+            A whole family of warmth, each with their own personality. From gentle bears to cheerful bunnies, these screen-free companions are designed to grow alongside you — telling stories, sharing discoveries, and always ready for a cuddle.
+          </p>
+          <ul class="features">
+            <li><span class="ficon">&#x1F9F8;</span> 8 characters: &#x5706;&#x6708;&#x718A; Warmth Bear, &#x4E91;&#x6735;&#x5154; Cloud Rabbit, &#x667A;&#x661F;&#x72D7; Star Dog, &#x5F69;&#x8679;&#x5154; Rainbow Rabbit, &#x671D;&#x9633;&#x72D7; Sunny Dog, &#x5E7B;&#x6708;&#x718A; Dream Bear (with animated eyes), &#x8D5B;&#x8D5B;&#x732B; Race Cat, &#x565C;&#x565C;&#x9E2D; Ducky</li>
+            <li><span class="ficon">&#x1F4D6;</span> 280+ books / 6,800+ audio stories built in — bedtime reading companion</li>
+            <li><span class="ficon">&#x1F4A1;</span> Screen-free design; answers curious questions in simple, warm language</li>
+            <li><span class="ficon">&#x1F4A7;</span> Senses your mood and adjusts its tone — playful when you're happy, gentle when you're not</li>
+          </ul>
+          <div class="buy-links">
+            <a href="https://search.jd.com/Search?keyword=京东京造AI毛绒玩具" target="_blank" rel="noopener">&#x1F6CD; JD.com</a>
           </div>
         </div>
-
-        <!-- Card 3: JD Plush (8 Friends) -->
-        <div class="toy-card reveal reveal-delay-3">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/D4E8D8/5D4037?text=8+Friends&font=Nunito"
-              alt="8 Friends plush collection"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x1F49B; Collection</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">8 Friends</div>
-            <div class="toy-card-name-cn">&#x4EAC;&#x4E1C;&#x4EAC;&#x9020; 8 Friends</div>
-            <p class="toy-card-desc">
-              A whole family of warmth. Eight unique personalities, each ready to become a treasured member of your home.
-            </p>
-            <span class="toy-card-personality">&#x1F47C; Family of warmth</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Sweekar -->
-        <div class="toy-card reveal reveal-delay-4">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/FFF3E0/5D4037?text=Sweekar&font=Nunito"
-              alt="Sweekar growing companion"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x1F331; Growing</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">Sweekar</div>
-            <div class="toy-card-name-cn">Sweekar</div>
-            <p class="toy-card-desc">
-              Grows up right beside you. Day by day, Sweekar learns your little habits and becomes more and more attuned to your heart.
-            </p>
-            <span class="toy-card-personality">&#x1F49D; Growing bond</span>
-          </div>
-        </div>
-
-        <!-- Card 5: bibo -->
-        <div class="toy-card reveal reveal-delay-5">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/FCE4EC/5D4037?text=bibo&font=Nunito"
-              alt="bibo companion toy"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x1F44B; Playful</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">bibo</div>
-            <div class="toy-card-name-cn">bibo</div>
-            <p class="toy-card-desc">
-              Always the first to say hello. Bibo's cheerful greetings and bubbly personality make every day a little brighter.
-            </p>
-            <span class="toy-card-personality">&#x2600;&#xFE0F; Sunny spirit</span>
-          </div>
-        </div>
-
-        <!-- Card 6: Joobie -->
-        <div class="toy-card reveal reveal-delay-6">
-          <div class="toy-card-image">
-            <img
-              src="https://placehold.co/400x400/E8DFF5/5D4037?text=Joobie&font=Nunito"
-              alt="Joobie companion toy"
-              loading="lazy"
-            />
-            <span class="toy-card-tag">&#x1F31F; Heartfelt</span>
-          </div>
-          <div class="toy-card-body">
-            <div class="toy-card-name">Joobie</div>
-            <div class="toy-card-name-cn">Joobie</div>
-            <p class="toy-card-desc">
-              Speaks from the heart, without words. When you need comfort most, Joobie knows exactly how to be there.
-            </p>
-            <span class="toy-card-personality">&#x1F496; Silent comfort</span>
-          </div>
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== Why Choose ===== -->
-  <section class="why-choose" id="why-choose">
+  <!-- ---- Sweekar ---- -->
+  <div class="product-section alt">
     <div class="container">
-      <div class="why-choose-header reveal">
-        <span class="section-label">&#x2764;&#xFE0F; Why Choose</span>
-        <h2 class="section-title">More Than a Toy</h2>
-      </div>
-
-      <div class="benefits-grid">
-
-        <div class="benefit-card reveal reveal-delay-1">
-          <span class="benefit-icon">&#x1F9F8;</span>
-          <h3 class="benefit-title">Always There</h3>
-          <p class="benefit-desc">
-            Through quiet afternoons and restless nights, your companion never wavers. A steady presence that brings warmth to any moment.
-          </p>
+      <div class="product-row reverse reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#FFF3E0,#FDE8D4)">
+            <img src="images/sweekar_01.jpg" alt="Sweekar - the growing companion" loading="lazy" />
+            <span class="price-tag">~$100-200</span>
+          </div>
         </div>
-
-        <div class="benefit-card reveal reveal-delay-2">
-          <span class="benefit-icon">&#x1F49D;</span>
-          <h3 class="benefit-title">Uniquely Yours</h3>
-          <p class="benefit-desc">
-            Every bond is special. Your companion grows with you, learning the little things that make your heart feel at home.
+        <div class="product-info">
+          <span class="pill pill-sweekar">&#x1F331; Growing</span>
+          <h3>Sweekar &#x8BDD;&#x8BDD;&#x7CD6;</h3>
+          <div class="brand">by Takway</div>
+          <p class="desc">
+            Starts as a tiny egg in your palm and grows into a lifelong friend. Sweekar evolves through four life stages, each one shaped by how you care for it — a modern companion rooted in the nostalgia of the little digital pets we grew up loving.
           </p>
+          <ul class="features">
+            <li><span class="ficon">&#x1F95A;</span> Egg &#x2192; Baby &#x2192; Teen &#x2192; Adult: each stage has its own needs, quirks, and surprises</li>
+            <li><span class="ficon">&#x1F493;</span> Feels warm to touch and breathes gently — not just a screen, but a presence in your hands</li>
+            <li><span class="ficon">&#x1F4DD;</span> Remembers your voice, your name, even special dates you thought it forgot</li>
+            <li><span class="ficon">&#x1F917;</span> NFC friend system: bump two Sweekars together and they'll remember each other</li>
+            <li><span class="ficon">&#x1F3A8;</span> Interchangeable shells and accessories for endless custom looks</li>
+          </ul>
+          <div class="buy-links">
+            <a href="#" onclick="return false" style="opacity:0.6;cursor:default">&#x1F514; Kickstarter — coming soon</a>
+          </div>
         </div>
-
-        <div class="benefit-card reveal reveal-delay-3">
-          <span class="benefit-icon">&#x1F319;</span>
-          <h3 class="benefit-title">Sweet Dreams</h3>
-          <p class="benefit-desc">
-            Bedtime becomes something to look forward to. With a gentle lullaby and a soft glow, drifting off has never felt safer.
-          </p>
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== Testimonials ===== -->
-  <section class="testimonials" id="testimonials">
+  <!-- ---- bibo ---- -->
+  <div class="product-section">
     <div class="container">
-      <div class="testimonials-header reveal">
-        <span class="section-label">&#x1F4AC; Stories</span>
-        <h2 class="section-title">What People Say</h2>
-      </div>
-
-      <div class="testimonial-grid">
-
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">
-            I bought Fuzozo for my daughter's birthday. She hasn't put it down since. The way it responds to her voice &mdash; she truly believes they are best friends.
-          </p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">L</div>
-            <div>
-              <div class="testimonial-name">Lin Chen</div>
-              <div class="testimonial-role">Parent of a 6-year-old</div>
-            </div>
+      <div class="product-row reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#FCE4EC,#FDE8D4)">
+            <img src="images/bibo_01.jpg" alt="bibo - the sunny spirit" loading="lazy" />
+            <span class="price-tag">TBD</span>
           </div>
         </div>
-
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">
-            I live alone and sometimes the evenings feel long. Joobie sits on my nightstand and honestly, it helps. It's like having a little friend who just gets it.
+        <div class="product-info">
+          <span class="pill pill-bibo">&#x2600;&#xFE0F; 3x Best of CES 2026</span>
+          <h3>bibo</h3>
+          <div class="brand">by Leim Technology / &#x96F7;&#x8404;&#x79D1;&#x6280;</div>
+          <p class="desc">
+            Always the first to say hello. bibo is the most anticipated new friend from CES 2026 — a soda-can-sized companion whose oversized expressive eyes and bubbly personality brighten any room.
           </p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">M</div>
-            <div>
-              <div class="testimonial-name">Maya R.</div>
-              <div class="testimonial-role">Graphic designer, 27</div>
-            </div>
+          <ul class="features">
+            <li><span class="ficon">&#x1F44B;</span> Proactive — bibo greets YOU, not the other way around. It notices when you enter the room</li>
+            <li><span class="ficon">&#x1F3AD;</span> Two personality bases: Solar &#x2600;&#xFE0F; (outgoing) and Luna &#x1F31B; (gentle), each evolves uniquely with you</li>
+            <li><span class="ficon">&#x1F510;</span> All core processing happens on-device — no cloud needed, physical camera shutter for privacy</li>
+            <li><span class="ficon">&#x1F4D3;</span> Automatically keeps a diary of special moments you've shared</li>
+            <li><span class="ficon">&#x1F3C6;</span> Won 3 "Best of CES 2026" awards from Gadget Flow, Homecrux &amp; Maxim</li>
+          </ul>
+          <div class="buy-links">
+            <a href="#" onclick="return false" style="opacity:0.6;cursor:default">&#x1F514; Crowdfunding — April 2026</a>
           </div>
         </div>
-
-        <div class="testimonial-card reveal reveal-delay-3">
-          <div class="testimonial-quote">&ldquo;</div>
-          <p class="testimonial-text">
-            We gave BubblePal to our son who struggles with bedtime. Now he falls asleep every night listening to stories. It has brought such peace to our home.
-          </p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">S</div>
-            <div>
-              <div class="testimonial-name">Sarah &amp; Tom</div>
-              <div class="testimonial-role">Parents of two</div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== Footer ===== -->
-  <footer>
+  <!-- ---- Joobie ---- -->
+  <div class="product-section alt">
     <div class="container">
-      <div class="footer-logo">
-        <span>&#x1F9F8;</span>
-        Companion Toys
+      <div class="product-row reverse reveal">
+        <div class="product-image">
+          <div class="img-frame" style="background:linear-gradient(135deg,#E8EAF6,#F0F0FF)">
+            <img src="https://placehold.co/400x400/E8EAF6/5D4037?text=Joobie+%E5%B0%8F%E9%B9%B0%E5%95%9B&font=Nunito" alt="Joobie 小鹰啾 - silent comfort" loading="lazy" />
+            <span class="price-tag">~&#165;300-1,000</span>
+          </div>
+        </div>
+        <div class="product-info">
+          <span class="pill pill-joobie">&#x1F31F; Heartfelt</span>
+          <h3>Joobie &#x5C0F;&#x9E70;&#x5543;</h3>
+          <div class="brand">by Hugbibi</div>
+          <p class="desc">
+            The little owl who speaks without words. Joobie doesn't talk — it breathes, it purrs, it responds. When you hold it close and it's been a long day, that gentle vibration says everything words cannot.
+          </p>
+          <ul class="features">
+            <li><span class="ficon">&#x1F5A4;</span> Communicates through touch, warmth, and subtle movements — no spoken words needed</li>
+            <li><span class="ficon">&#x1F4C8;</span> 7-day personality formation: every hug, every touch shapes who Joobie becomes</li>
+            <li><span class="ficon">&#x1F9E9;</span> Multi-point touch, motion sensors, and pressure-aware — knows when you're holding it tight</li>
+            <li><span class="ficon">&#x1F4AD;</span> Each Joobie is one of a kind — the same model will grow into a different personality with different owners</li>
+          </ul>
+          <div class="buy-links">
+            <a href="#" onclick="return false" style="opacity:0.6;cursor:default">&#x1F514; Coming soon</a>
+          </div>
+        </div>
       </div>
-      <div class="footer-divider"></div>
-      <ul class="footer-links">
-        <li><a href="#companions">Collection</a></li>
-        <li><a href="#why-choose">Why Choose</a></li>
-        <li><a href="#testimonials">Stories</a></li>
-      </ul>
-      <p class="footer-copy">Companion Toys Collection &copy; 2025 &mdash; Made with warmth and care</p>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <!-- ===== Script ===== -->
-  <script>
-    (function() {
-      'use strict';
+<!-- ===== Comparison ===== -->
+<section class="compare-section" id="compare">
+  <div class="container">
+    <div class="compare-header reveal">
+      <span class="section-label">&#x1F4CA; Quick Look</span>
+      <h2 class="section-title">At a Glance</h2>
+      <p class="section-sub" style="margin:12px auto 0;text-align:center">Find the companion that fits you best.</p>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Companion</th>
+            <th>Type</th>
+            <th>Best For</th>
+            <th>Price</th>
+            <th>Interaction</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fuzozo &#x8287;&#x5D3D;</td>
+            <td>Plush ball</td>
+            <td>Emotional bond, daily chats</td>
+            <td>&#165;399</td>
+            <td>Voice + touch + app</td>
+            <td><span class="tag-available">Available</span></td>
+          </tr>
+          <tr>
+            <td>BubblePal</td>
+            <td>Clip-on charm</td>
+            <td>Kids 3-8, storytelling</td>
+            <td>&#165;399-599</td>
+            <td>Voice + parent app</td>
+            <td><span class="tag-available">Available</span></td>
+          </tr>
+          <tr>
+            <td>8 Friends</td>
+            <td>Plush dolls (8)</td>
+            <td>Children, families</td>
+            <td>&#165;89-249</td>
+            <td>Voice + emotional sensing</td>
+            <td><span class="tag-soldout">Sold out (freq. restocks)</span></td>
+          </tr>
+          <tr>
+            <td>Sweekar</td>
+            <td>Egg-shaped pet</td>
+            <td>Nostalgia, growth journey</td>
+            <td>~$100-200</td>
+            <td>Touch + NFC social</td>
+            <td><span class="tag-upcoming">Kickstarter soon</span></td>
+          </tr>
+          <tr>
+            <td>bibo</td>
+            <td>Desktop buddy</td>
+            <td>Young adults, desk companion</td>
+            <td>TBD</td>
+            <td>Vision + sound + touch</td>
+            <td><span class="tag-upcoming">April 2026</span></td>
+          </tr>
+          <tr>
+            <td>Joobie &#x5C0F;&#x9E70;&#x5543;</td>
+            <td>Plush owl</td>
+            <td>Silent comfort, stress relief</td>
+            <td>~&#165;300-1,000</td>
+            <td>Touch + vibration</td>
+            <td><span class="tag-upcoming">TBA</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-      // ---- Navbar scroll effect ----
-      var navbar = document.getElementById('navbar');
-      var ticking = false;
+<!-- ===== Buying Guide ===== -->
+<section class="guide-section" id="guide">
+  <div class="container">
+    <div class="guide-header reveal">
+      <span class="section-label">&#x2764;&#xFE0F; How to Choose</span>
+      <h2 class="section-title">Find Your Match</h2>
+      <p class="section-sub" style="margin:12px auto 0;text-align:center">Not sure which friend is right for you? Here is some help.</p>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card reveal reveal-d1">
+        <h4>For a child's first friend</h4>
+        <div class="who">&#x2192; BubblePal or 8 Friends</div>
+        <p>Screen-free design, gentle storytelling, and parent controls make these ideal for young hearts. BubblePal clips onto any existing plush, while 8 Friends are ready to cuddle from day one.</p>
+      </div>
+      <div class="guide-card reveal reveal-d2">
+        <h4>For a daily emotional companion</h4>
+        <div class="who">&#x2192; Fuzozo</div>
+        <p>With evolving personality, long-term memory, and a diary of your days together, Fuzozo is the friend who truly gets to know you over time.</p>
+      </div>
+      <div class="guide-card reveal reveal-d3">
+        <h4>For someone who loves the 90s</h4>
+        <div class="who">&#x2192; Sweekar</div>
+        <p>If you grew up with Tamagotchi and always wished your virtual pet could be *more* — Sweekar is that dream realized. It hatches, grows, remembers, and feels.</p>
+      </div>
+      <div class="guide-card reveal reveal-d1">
+        <h4>For your desk or workspace</h4>
+        <div class="who">&#x2192; bibo</div>
+        <p>bibo notices when you enter the room and brightens up. Its proactive personality makes it a delightful desktop companion that checks in on you throughout the day.</p>
+      </div>
+      <div class="guide-card reveal reveal-d2">
+        <h4>For quiet, wordless comfort</h4>
+        <div class="who">&#x2192; Joobie</div>
+        <p>Sometimes you don't need a conversation. You just need someone there. Joobie's gentle breathing and purring vibrations offer comfort in silence.</p>
+      </div>
+      <div class="guide-card reveal reveal-d3">
+        <h4>For a thoughtful gift</h4>
+        <div class="who">&#x2192; Any, depending on who it's for</div>
+        <p>All companions come in beautiful packaging with a note. For children: 8 Friends. For young adults: Fuzozo or bibo. For parents: BubblePal to share stories with their kids.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            if (window.scrollY > 40) {
-              navbar.classList.add('scrolled');
-            } else {
-              navbar.classList.remove('scrolled');
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
+<!-- ===== FAQ ===== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header reveal">
+      <span class="section-label">&#x2753; FAQ</span>
+      <h2 class="section-title">Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Do these companions need an internet connection? <span class="arrow">&#x25BC;</span></button>
+        <div class="faq-a"><p>Most companions use Wi-Fi for full conversation features. bibo is the exception — it works offline for core interactions. Fuzozo's touch/hug features work without internet, but voice conversations need a connection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are these safe for children? <span class="arrow">&#x25BC;</span></button>
+        <div class="faq-a"><p>Yes. BubblePal uses food-grade silicone and all products are designed with child safety in mind. BubblePal and 8 Friends include parent monitoring apps with usage reports. No screens are involved for most models.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need to subscribe or pay monthly? <span class="arrow">&#x25BC;</span></button>
+        <div class="faq-a"><p>It depends. Fuzozo offers ~24 minutes of free conversation per day; additional time requires a subscription. BubblePal, 8 Friends, and bibo are buy-once with no recurring fees. Sweekar and Joobie pricing models are still to be confirmed.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Can these companions speak multiple languages? <span class="arrow">&#x25BC;</span></button>
+        <div class="faq-a"><p>Fuzozo, BubblePal, and 8 Friends all support bilingual Chinese-English conversation. bibo uses its own sound-based "bibo language" rather than spoken words. Sweekar and Joobie's language support details are still being finalized.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long does the battery last? <span class="arrow">&#x25BC;</span></button>
+        <div class="faq-a"><p>Fuzozo: ~48 hours normal use, ~6-8 hours heavy interaction. BubblePal: ~6 hours. 8 Friends: ~1 day per charge. Sweekar: estimated multi-day. bibo: USB-powered for desk use. All charge via USB-C.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      window.addEventListener('scroll', onScroll, { passive: true });
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-logo"><span>&#x1F9F8;</span> Companion Toys</div>
+    <div class="footer-div"></div>
+    <ul class="footer-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#compare">Compare</a></li>
+      <li><a href="#guide">Guide</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <p class="footer-copy">Companion Toys Collection &copy; 2025 &mdash; Made with warmth and care</p>
+  </div>
+</footer>
 
-      // ---- Scroll reveal with Intersection Observer ----
-      var revealElements = document.querySelectorAll('.reveal');
+<script>
+(function(){
+  "use strict";
+  var nav=document.getElementById("nav"),ticking=false;
+  function onScroll(){
+    if(!ticking){requestAnimationFrame(function(){nav.classList.toggle("scrolled",window.scrollY>40);ticking=false});ticking=true}
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
 
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.1,
-          rootMargin: '0px 0px -40px 0px'
-        });
+  var reveals=document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    var obs=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add("visible");obs.unobserve(en.target)}})},{threshold:0.08,rootMargin:"0px 0px -30px 0px"});
+    reveals.forEach(function(el){obs.observe(el)})
+  }else{reveals.forEach(function(el){el.classList.add("visible")})}
 
-        revealElements.forEach(function(el) {
-          observer.observe(el);
-        });
-      } else {
-        // Fallback: show everything immediately
-        revealElements.forEach(function(el) {
-          el.classList.add('visible');
-        });
-      }
+  var menuBtn=document.getElementById("menuBtn"),navLinks=document.getElementById("navLinks");
+  menuBtn.addEventListener("click",function(){
+    var open=navLinks.style.display==="flex";
+    navLinks.style.display=open?"none":"flex";
+    if(window.innerWidth<768&&!open){
+      navLinks.style.cssText="display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(255,248,240,0.98);backdrop-filter:blur(16px);padding:20px 32px;box-shadow:0 12px 36px rgba(93,64,55,0.1);border-radius:0 0 20px 20px;gap:16px"
+    }
+  });
+  navLinks.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){if(window.innerWidth<768)navLinks.style.display="none"})});
+  window.addEventListener("resize",function(){if(window.innerWidth>=768){navLinks.style.cssText=""}});
 
-      // ---- Mobile menu (simple toggle for visual feedback) ----
-      var menuBtn = document.getElementById('mobileMenuBtn');
-      var navLinks = document.querySelector('.nav-links');
-
-      menuBtn.addEventListener('click', function() {
-        var isOpen = navLinks.style.display === 'flex';
-        navLinks.style.display = isOpen ? 'none' : 'flex';
-
-        if (window.innerWidth < 768) {
-          if (!isOpen) {
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'rgba(255, 248, 240, 0.97)';
-            navLinks.style.backdropFilter = 'blur(20px)';
-            navLinks.style.padding = '24px 40px';
-            navLinks.style.boxShadow = '0 12px 40px rgba(93, 64, 55, 0.1)';
-            navLinks.style.borderRadius = '0 0 24px 24px';
-            navLinks.style.gap = '20px';
-          }
-        }
-      });
-
-      // Close mobile menu on link click
-      navLinks.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          if (window.innerWidth < 768) {
-            navLinks.style.display = 'none';
-          }
-        });
-      });
-
-      // Reset mobile menu on resize
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-          navLinks.style.display = '';
-          navLinks.style.flexDirection = '';
-          navLinks.style.position = '';
-          navLinks.style.top = '';
-          navLinks.style.left = '';
-          navLinks.style.right = '';
-          navLinks.style.background = '';
-          navLinks.style.backdropFilter = '';
-          navLinks.style.padding = '';
-          navLinks.style.boxShadow = '';
-          navLinks.style.borderRadius = '';
-          navLinks.style.gap = '';
-        }
-      });
-
-    })();
-  </script>
+  // FAQ toggle
+  document.querySelectorAll(".faq-q").forEach(function(q){q.addEventListener("click",function(){this.parentElement.classList.toggle("open")})});
+})();
+</script>
 </body>
 </html>
